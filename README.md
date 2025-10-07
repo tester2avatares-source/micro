@@ -106,7 +106,9 @@ is an example of the absolute minimum configuration, and is used to keep
 track of the code size of the core runtime and VM.
 
 In addition, the following ports are provided in this repository:
+ - [alif](ports/alif) -- Alif Semiconductor Ensemble MCUs.
  - [cc3200](ports/cc3200) -- Texas Instruments CC3200 (including PyCom WiPy).
+ - [embed](ports/embed) -- Generates a set of .c and .h files for embedding into a project.
  - [esp32](ports/esp32) -- Espressif ESP32 SoC (including ESP32S2, ESP32S3, ESP32C3, ESP32C6).
  - [esp8266](ports/esp8266) -- Espressif ESP8266 SoC.
  - [mimxrt](ports/mimxrt) -- NXP m.iMX RT (including Teensy 4.x).
@@ -120,6 +122,55 @@ In addition, the following ports are provided in this repository:
  - [stm32](ports/stm32) -- STMicroelectronics STM32 family (including F0, F4, F7, G0, G4, H7, L0, L4, WB)
  - [webassembly](ports/webassembly) -- Emscripten port targeting browsers and NodeJS.
  - [zephyr](ports/zephyr) -- Zephyr RTOS.
+
+Port Tier levels
+----------------
+
+MicroPython operates with a set of Tier levels for the ports. Tiers 0 through 3
+are for ports under active development, with Tier 0 indicating a port used heavily
+for testing as part of CI.  Tier M is for older ports now in maintenance mode.
+These Tier levels are defined in the table below.
+
+|                                     | Tier 0 | Tier 1 | Tier 2 | Tier 3 | Tier M |
+|-------------------------------------|--------|--------|--------|--------|--------|
+| builds pass under CI                | x      | x      | x      | x      | x      |
+| actively maintained                 | x      | x      | x      |        | x      |
+| stable Python API                   | x      | x      | x      |        | x      |
+| tested on hardware for releases     | x      | x      | x      |        | x      |
+| new features actively developed     | x      | x      | x      | x      |        |
+| prioritized bug reports             | x      | x      |        |        |        |
+| regressions warrant a patch release | x      | x      |        |        |        |
+| tests run under CI                  | x      |        |        |        |        |
+
+Tier 0 ports:
+- bare-arm
+- minimal
+- qemu
+- unix
+
+Tier 1 ports:
+- esp32
+- mimxrt
+- rp2
+- samd
+- stm32
+
+Tier 2 ports:
+- alif
+- nrf
+- renesas-ra
+- webassembly
+- windows
+- zephyr
+
+Tier 3 ports:
+- embed
+- powerpc
+- pic16bit
+
+Tier M ports:
+- cc3200
+- esp8266
 
 The MicroPython cross-compiler, mpy-cross
 -----------------------------------------
